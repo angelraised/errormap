@@ -444,6 +444,75 @@ textarea:focus {
   color: var(--success) !important;
 }
 
+/* Normalize every legacy light inline surface in dark mode. React serializes
+   hex colors to rgb(), so both representations are intentionally covered. */
+:root[data-theme='dark'] .main-content [style*="background: #f8fafc"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(248, 250, 252)"],
+:root[data-theme='dark'] .main-content [style*="background: #f1f5f9"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(241, 245, 249)"] {
+  background: var(--bg-card-hover) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="background: #e2e8f0"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(226, 232, 240)"] {
+  background: var(--border) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="background: #f0fdf4"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(240, 253, 244)"] {
+  background: var(--success-light) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="background: #fef2f2"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(254, 242, 242)"],
+:root[data-theme='dark'] .main-content [style*="background: #fee2e2"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(254, 226, 226)"],
+:root[data-theme='dark'] .main-content [style*="background: #fffdfd"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(255, 253, 253)"] {
+  background: var(--danger-light) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="background: #fefce8"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(254, 252, 232)"] {
+  background: var(--warning-light) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="background: #eff6ff"],
+:root[data-theme='dark'] .main-content [style*="background: rgb(239, 246, 255)"] {
+  background: var(--primary-light) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="linear-gradient"][style*="#ffffff"],
+:root[data-theme='dark'] .main-content [style*="linear-gradient"][style*="rgb(255, 255, 255)"] {
+  background: linear-gradient(135deg, var(--bg-card-hover), var(--bg-card)) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="color: #166534"],
+:root[data-theme='dark'] .main-content [style*="color: rgb(22, 101, 52)"] {
+  color: var(--success) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="color: #991b1b"],
+:root[data-theme='dark'] .main-content [style*="color: rgb(153, 27, 27)"],
+:root[data-theme='dark'] .main-content [style*="color: #dc2626"],
+:root[data-theme='dark'] .main-content [style*="color: rgb(220, 38, 38)"] {
+  color: var(--danger) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="color: #1e40af"],
+:root[data-theme='dark'] .main-content [style*="color: rgb(30, 64, 175)"],
+:root[data-theme='dark'] .main-content [style*="color: #1e3a8a"],
+:root[data-theme='dark'] .main-content [style*="color: rgb(30, 58, 138)"] {
+  color: var(--primary) !important;
+}
+
+:root[data-theme='dark'] .main-content [style*="color: #854d0e"],
+:root[data-theme='dark'] .main-content [style*="color: rgb(133, 77, 14)"],
+:root[data-theme='dark'] .main-content [style*="color: #ea580c"],
+:root[data-theme='dark'] .main-content [style*="color: rgb(234, 88, 12)"] {
+  color: var(--warning) !important;
+}
+
 :root[data-theme='dark'] .main-content [style*="color: rgb(15, 23, 42)"],
 :root[data-theme='dark'] .main-content [style*="color: #0f172a"] {
   color: var(--text-primary) !important;
