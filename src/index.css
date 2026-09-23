@@ -433,6 +433,17 @@ textarea:focus {
   background: linear-gradient(135deg, var(--bg-card-hover), var(--bg-card)) !important;
 }
 
+:root[data-theme='dark'] .teacher-content-card,
+:root[data-theme='dark'] .teacher-answer-card {
+  background: var(--bg-card-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme='dark'] .teacher-answer-card.correct {
+  background: var(--success-light) !important;
+  color: var(--success) !important;
+}
+
 :root[data-theme='dark'] .main-content [style*="color: rgb(15, 23, 42)"],
 :root[data-theme='dark'] .main-content [style*="color: #0f172a"] {
   color: var(--text-primary) !important;

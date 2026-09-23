@@ -372,7 +372,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
               </p>
             ) : (
               materials.map(mat => (
-                <div key={mat.id} style={{
+                <div key={mat.id} className="teacher-content-card" style={{
                   padding: '14px 18px',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--border)',
@@ -408,7 +408,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
               </p>
             ) : (
               tests.map(test => (
-                <div key={test.id} style={{
+                <div key={test.id} className="teacher-content-card" style={{
                   padding: '14px 18px',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--border)',
@@ -836,7 +836,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
               </div>
 
               {/* Question summary / editor */}
-              <div style={{ background: '#f8fafc', padding: '16px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+              <div className="teacher-content-card" style={{ background: '#f8fafc', padding: '16px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
                 <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
                   {c.question} 1 (ErrorMap)
                 </div>
@@ -936,13 +936,13 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {previewTest.questions.map((q, idx) => (
-                <div key={q.id} style={{ background: '#f8fafc', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+                <div key={q.id} className="teacher-content-card" style={{ background: '#f8fafc', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
                   <div style={{ fontSize: '0.95rem', fontWeight: 800, marginBottom: '8px' }}>
                     {idx + 1}. {q.text}
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.88rem' }}>
                     {q.options.map(opt => (
-                      <div key={opt.id} style={{
+                      <div key={opt.id} className={opt.isCorrect ? 'teacher-answer-card correct' : 'teacher-answer-card'} style={{
                         padding: '8px 12px',
                         borderRadius: 'var(--radius-sm)',
                         background: opt.isCorrect ? '#f0fdf4' : '#ffffff',
