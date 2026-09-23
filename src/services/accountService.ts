@@ -161,6 +161,20 @@ export async function saveLearningProfile(userId: string, profile: StudentProfil
   if (error) console.warn('Could not sync learning progress to Supabase:', error.message);
 }
 
+export async function getLearningProfile(userId: string): Promise<StudentProfile | null> {
+  if (!isSupabaseConfigured || !supabase || userId.startsWith('usr_') || userId.startsWith('demo_')) return null;
+  const { data, error } = await supabase
+    .from('learning_profiles')
+    .select('profile_data')
+    .eq('user_id', userId)
+    .maybeSingle();
+  if (error) throw error;
+  const profile = data?.profile_data;
+  return profile && typeof profile === 'object' && Object.keys(profile).length > 0
+    ? profile as StudentProfile
+    : null;
+}
+
 export async function listStudentAccounts(): Promise<TeacherStudentSummary[]> {
   if (!isSupabaseConfigured || !supabase) {
     return readLocalAccounts()

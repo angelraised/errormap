@@ -4,7 +4,7 @@ import type { Language } from './translations';
 import { getBrowserLanguage, translations } from './translations';
 import type { StudentProfile, SubjectId, UserAccount } from './types';
 import { createFreshStudentProfile } from './mockData';
-import { createAccount, saveLearningProfile, signInAccount, signOutAccount } from './services/accountService';
+import { createAccount, getLearningProfile, saveLearningProfile, signInAccount, signOutAccount } from './services/accountService';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { LoginView } from './components/LoginView';
 import { AuthWizard } from './components/AuthWizard';
@@ -104,7 +104,8 @@ export function App() {
     const saved = await signInAccount(email, password);
     setAccount(saved);
     if (saved.role === 'student') {
-      setProfile(readProfile(saved));
+      const cloudProfile = await getLearningProfile(saved.id);
+      setProfile(cloudProfile ?? readProfile(saved));
       setScreen('student_home');
     } else setScreen('teacher_home');
   };
