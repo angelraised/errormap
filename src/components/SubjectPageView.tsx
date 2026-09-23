@@ -11,6 +11,7 @@ import type {
 import type { Language } from '../translations';
 import { translations } from '../translations';
 import { getLearningMaterials, getTeacherTests } from '../services/accountService';
+import { ErrorTwin } from './ErrorTwin';
 import { 
   ArrowLeft, 
   BookOpen, 
@@ -51,6 +52,7 @@ export const SubjectPageView: React.FC<SubjectPageViewProps> = ({
   const [tests, setTests] = useState<TeacherTest[]>([]);
   const [selectedTopic, setSelectedTopic] = useState<string>('all');
   const [viewingMaterial, setViewingMaterial] = useState<LearningMaterial | null>(null);
+  const [isTwinOpen, setIsTwinOpen] = useState(false);
 
   const prog = profile.subjectProgress?.[subject];
   const isDiagnosticCompleted = Boolean(prog?.diagnosticCompleted || prog?.status === 'completed');
@@ -221,6 +223,24 @@ export const SubjectPageView: React.FC<SubjectPageViewProps> = ({
           </button>
         </div>
       )}
+
+      {/* Error Twin: personalized misconception debugging mini-game */}
+      <div className="error-twin-card">
+        <div className="error-twin-avatar">👾</div>
+        <div className="error-twin-copy">
+          <span className="eyebrow">ERRORMAP LAB</span>
+          <h2>{language === 'ru' ? 'Твой Error Twin' : language === 'kz' ? 'Сенің Error Twin' : 'Your Error Twin'}</h2>
+          <p>{errorMapHistory.length > 0
+            ? (language === 'ru' ? 'Он повторяет твою последнюю ошибку. Найди неверный шаг раньше него.' : 'It repeats your latest misconception. Catch the faulty step.')
+            : (language === 'ru' ? 'Попробуй демо, а после теста двойник научится ошибаться именно как ты.' : 'Try a demo. After a test, the twin will learn your personal mistake pattern.')}
+          </p>
+        </div>
+        <button className="btn btn-primary error-twin-button" onClick={() => setIsTwinOpen(true)}>
+          {errorMapHistory.length > 0
+            ? (language === 'ru' ? 'Сразиться с двойником' : 'Challenge My Twin')
+            : (language === 'ru' ? 'Попробовать демо' : 'Try Demo Twin')}
+        </button>
+      </div>
 
       {/* Tabs */}
       <div style={{
@@ -747,6 +767,15 @@ export const SubjectPageView: React.FC<SubjectPageViewProps> = ({
             </div>
           </div>
         </div>
+      )}
+
+      {isTwinOpen && (
+        <ErrorTwin
+          subject={subject}
+          record={errorMapHistory[errorMapHistory.length - 1]}
+          language={language}
+          onClose={() => setIsTwinOpen(false)}
+        />
       )}
     </div>
   );
