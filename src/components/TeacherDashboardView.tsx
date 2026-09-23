@@ -33,6 +33,26 @@ interface TeacherDashboardProps {
   onOpenAnalytics: () => void;
 }
 
+const teacherCopy = {
+  en: { addMaterial: 'Add Learning Material', createTest: 'Create Test', materials: 'Published Materials', tests: 'Created Tests', noMaterials: 'No materials created for your assigned subjects yet.', noTests: 'No tests created for your assigned subjects yet.', topic: 'Topic', target: 'Target', status: 'Status', questions: 'questions', preview: 'Preview', publishMaterial: 'Publish Learning Material', title: 'Title', subject: 'Subject (restricted to teaching profile)', type: 'Type', textLesson: 'Text lesson', video: 'Video', pdf: 'PDF document', link: 'External link', topicSkill: 'Topic / skill', level: 'Target level', beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced', description: 'Description / overview', content: 'Content or URL', publishNow: 'Publish immediately', draft: 'Save as draft', cancel: 'Cancel', saveMaterial: 'Save material', createAssessment: 'Create assessment test', testTitle: 'Test title', topicDomain: 'Topic / domain', goal: 'Target goal', olympiad: 'Olympiad', exam: 'Exam', grades: 'Grades', newSkill: 'New skill', duration: 'Duration (min)', question: 'Question', options: 'Options', publishTest: 'Publish test', correct: 'Correct', misconception: 'Misconception note', close: 'Close preview', none: 'None selected', fillMaterial: 'Please fill in title and content.', fillTest: 'Please enter a test title and at least one question.' },
+  ru: { addMaterial: 'Добавить материал', createTest: 'Создать тест', materials: 'Опубликованные материалы', tests: 'Созданные тесты', noMaterials: 'По вашим предметам пока нет материалов.', noTests: 'По вашим предметам пока нет тестов.', topic: 'Тема', target: 'Уровень', status: 'Статус', questions: 'вопросов', preview: 'Посмотреть', publishMaterial: 'Опубликовать учебный материал', title: 'Название', subject: 'Предмет (из профиля преподавателя)', type: 'Тип', textLesson: 'Текстовый урок', video: 'Видео', pdf: 'PDF-документ', link: 'Внешняя ссылка', topicSkill: 'Тема / навык', level: 'Уровень учеников', beginner: 'Начальный', intermediate: 'Средний', advanced: 'Продвинутый', description: 'Описание', content: 'Содержание или ссылка', publishNow: 'Опубликовать сразу', draft: 'Сохранить как черновик', cancel: 'Отмена', saveMaterial: 'Сохранить материал', createAssessment: 'Создать проверочный тест', testTitle: 'Название теста', topicDomain: 'Тема / раздел', goal: 'Цель', olympiad: 'Олимпиада', exam: 'Экзамен', grades: 'Оценки', newSkill: 'Новый навык', duration: 'Длительность (мин)', question: 'Вопрос', options: 'Варианты', publishTest: 'Опубликовать тест', correct: 'Правильный ответ', misconception: 'Типичная ошибка', close: 'Закрыть', none: 'Ничего не выбрано', fillMaterial: 'Заполните название и содержание.', fillTest: 'Введите название теста и добавьте хотя бы один вопрос.' },
+  kz: { addMaterial: 'Материал қосу', createTest: 'Тест жасау', materials: 'Жарияланған материалдар', tests: 'Жасалған тесттер', noMaterials: 'Пәндеріңіз бойынша материалдар әзірге жоқ.', noTests: 'Пәндеріңіз бойынша тесттер әзірге жоқ.', topic: 'Тақырып', target: 'Деңгей', status: 'Күйі', questions: 'сұрақ', preview: 'Қарау', publishMaterial: 'Оқу материалын жариялау', title: 'Атауы', subject: 'Пән (мұғалім профилінен)', type: 'Түрі', textLesson: 'Мәтіндік сабақ', video: 'Бейне', pdf: 'PDF құжаты', link: 'Сыртқы сілтеме', topicSkill: 'Тақырып / дағды', level: 'Оқушы деңгейі', beginner: 'Бастапқы', intermediate: 'Орта', advanced: 'Жоғары', description: 'Сипаттама', content: 'Мазмұн немесе сілтеме', publishNow: 'Бірден жариялау', draft: 'Жоба ретінде сақтау', cancel: 'Бас тарту', saveMaterial: 'Материалды сақтау', createAssessment: 'Тексеру тестін жасау', testTitle: 'Тест атауы', topicDomain: 'Тақырып / бөлім', goal: 'Мақсат', olympiad: 'Олимпиада', exam: 'Емтихан', grades: 'Бағалар', newSkill: 'Жаңа дағды', duration: 'Ұзақтығы (мин)', question: 'Сұрақ', options: 'Нұсқалар', publishTest: 'Тестті жариялау', correct: 'Дұрыс жауап', misconception: 'Типтік қате', close: 'Жабу', none: 'Ештеңе таңдалмаған', fillMaterial: 'Атауы мен мазмұнын толтырыңыз.', fillTest: 'Тест атауын енгізіп, кемінде бір сұрақ қосыңыз.' }
+} as const;
+
+const defaultTestQuestion = (language: Language): TeacherTestQuestion => {
+  const localized = language === 'ru'
+    ? { text: 'Какая структура данных обеспечивает поиск и вставку в среднем за O(1)?', options: ['Хеш-таблица', 'Связный список', 'Двоичное дерево поиска', 'Неотсортированный массив'], explanation: 'Хеш-таблица использует хеш-функцию и в среднем выполняет операции за O(1).', hint: 'Вспомните прямой доступ по хешу.', verification: 'Какова худшая сложность поиска при множестве коллизий? O(n) или O(1)?' }
+    : language === 'kz'
+      ? { text: 'Қай деректер құрылымы іздеу мен қосуды орташа O(1) уақытта орындайды?', options: ['Хеш-кесте', 'Байланысқан тізім', 'Екілік іздеу ағашы', 'Сұрыпталмаған массив'], explanation: 'Хеш-кесте хеш-функцияны қолданып, операцияларды орташа O(1) уақытта орындайды.', hint: 'Хеш арқылы тікелей қолжетімділікті еске түсір.', verification: 'Көп коллизия болғандағы іздеудің ең нашар күрделілігі қандай: O(n) әлде O(1)?' }
+      : { text: 'Which data structure provides average O(1) time complexity for both lookup and insertion?', options: ['Hash Table', 'Linked List', 'Binary Search Tree', 'Array (unsorted)'], explanation: 'Hash tables map keys to bucket indices using a hash function, delivering expected O(1) operations.', hint: 'Think of constant-time direct indexing via hash codes.', verification: 'What is the worst-case lookup complexity with full collisions: O(n) or O(1)?' };
+
+  return {
+    id: `q_${Date.now()}_1`, text: localized.text,
+    options: localized.options.map((text, index) => ({ id: `opt_${index + 1}`, text, isCorrect: index === 0, misconceptionNote: index === 0 ? undefined : language === 'ru' ? 'Эта структура не обеспечивает среднее O(1) для обеих операций.' : language === 'kz' ? 'Бұл құрылым екі операцияға да орташа O(1) уақытын бермейді.' : 'This structure does not provide average O(1) for both operations.' })),
+    explanation: localized.explanation, hint: localized.hint, verificationTask: localized.verification
+  };
+};
+
 export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
   account,
   language,
@@ -40,6 +60,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
   onOpenAnalytics
 }) => {
   const t = translations[language];
+  const c = teacherCopy[language];
   const isDemo = account.id.startsWith('demo_');
   const [students, setStudents] = useState<TeacherStudentSummary[]>(isDemo ? DEMO_TEACHER_STUDENTS : []);
   const [isLoading, setIsLoading] = useState(!isDemo);
@@ -78,21 +99,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
   const [testIsAdaptive] = useState(false);
   const [testDuration, setTestDuration] = useState(15);
   const [testStatus, setTestStatus] = useState<'draft' | 'published'>('published');
-  const [testQuestions] = useState<TeacherTestQuestion[]>([
-    {
-      id: `q_${Date.now()}_1`,
-      text: 'Which data structure provides average O(1) time complexity for both lookup and insertion?',
-      options: [
-        { id: 'opt_1', text: 'Hash Table', isCorrect: true },
-        { id: 'opt_2', text: 'Linked List', isCorrect: false, misconceptionNote: 'Linked list search requires O(N) linear traversal.' },
-        { id: 'opt_3', text: 'Binary Search Tree', isCorrect: false, misconceptionNote: 'BST lookup is O(log N) balanced or O(N) worst case.' },
-        { id: 'opt_4', text: 'Array (unsorted)', isCorrect: false, misconceptionNote: 'Unsorted array lookup requires linear scanning O(N).' }
-      ],
-      explanation: 'Hash tables map keys to bucket indices using a hash function, delivering expected O(1) operations.',
-      hint: 'Think of constant-time direct indexing via hash codes.',
-      verificationTask: 'What is the worst-case lookup complexity of a hash table with full collisions? (A) O(N) (B) O(1).'
-    }
-  ]);
+  const [testQuestions] = useState<TeacherTestQuestion[]>(() => [defaultTestQuestion(language)]);
 
   // Preview Test Modal
   const [previewTest, setPreviewTest] = useState<TeacherTest | null>(null);
@@ -124,13 +131,13 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
   const needsAttentionList = students.filter(s => s.status === 'needs_attention');
   const subjectsLabel = teacherSubjs.length > 0 
     ? teacherSubjs.map(s => t[`subj_${s}` as keyof typeof t] as string || s).join(', ')
-    : 'None selected';
+    : c.none;
 
   // Handle Save Learning Material
   const handleSaveMaterial = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!matTitle.trim() || !matContent.trim()) {
-      alert('Please fill in title and content.');
+      alert(c.fillMaterial);
       return;
     }
 
@@ -166,7 +173,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
   const handleSaveTest = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!testTitle.trim() || testQuestions.length === 0) {
-      alert('Please enter a test title and at least one question.');
+      alert(c.fillTest);
       return;
     }
 
@@ -198,7 +205,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
   };
 
   return (
-    <div className="animate-fade-in" style={{ maxWidth: '820px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '22px' }}>
+    <div className="animate-fade-in teacher-dashboard" style={{ maxWidth: '820px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '22px' }}>
       {/* 1. Friendly Clean Greeting */}
       <div style={{
         background: '#ffffff',
@@ -232,7 +239,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
             style={{ padding: '8px 16px', fontSize: '0.88rem', borderColor: 'var(--primary)', color: 'var(--primary)' }}
           >
             <BookOpen size={16} />
-            <span>Add Learning Material</span>
+            <span>{c.addMaterial}</span>
           </button>
 
           <button
@@ -241,7 +248,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
             style={{ padding: '8px 16px', fontSize: '0.88rem', background: 'var(--accent-purple)', borderColor: 'var(--accent-purple)' }}
           >
             <PlusCircle size={16} />
-            <span>Create Test</span>
+            <span>{c.createTest}</span>
           </button>
         </div>
       </div>
@@ -337,7 +344,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                 cursor: 'pointer'
               }}
             >
-              Published Materials ({materials.length})
+              {c.materials} ({materials.length})
             </button>
             <button
               onClick={() => setActiveViewTab('tests')}
@@ -352,7 +359,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                 cursor: 'pointer'
               }}
             >
-              Created Tests ({tests.length})
+              {c.tests} ({tests.length})
             </button>
           </div>
         </div>
@@ -361,7 +368,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {materials.length === 0 ? (
               <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', textAlign: 'center', padding: '16px' }}>
-                No materials created for your assigned subjects yet.
+                {c.noMaterials}
               </p>
             ) : (
               materials.map(mat => (
@@ -384,7 +391,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                       <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>({mat.type})</span>
                     </div>
                     <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-                      Topic: {mat.topic} • Target: {mat.recommendedLevel} • Status: <strong style={{ color: mat.status === 'published' ? 'var(--success)' : 'var(--text-muted)' }}>{mat.status}</strong>
+                      {c.topic}: {mat.topic} • {c.target}: {mat.recommendedLevel} • {c.status}: <strong style={{ color: mat.status === 'published' ? 'var(--success)' : 'var(--text-muted)' }}>{mat.status}</strong>
                     </div>
                   </div>
                 </div>
@@ -397,7 +404,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {tests.length === 0 ? (
               <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', textAlign: 'center', padding: '16px' }}>
-                No tests created for your assigned subjects yet.
+                {c.noTests}
               </p>
             ) : (
               tests.map(test => (
@@ -417,10 +424,10 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                         {test.subject}
                       </span>
                       <strong style={{ fontSize: '0.95rem', color: 'var(--text-primary)' }}>{test.title}</strong>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>({test.questions.length} questions, {test.durationMinutes}m)</span>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>({test.questions.length} {c.questions}, {test.durationMinutes} мин)</span>
                     </div>
                     <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-                      Topic: {test.topic} • Target: {test.targetLevel} • Status: <strong style={{ color: test.status === 'published' ? 'var(--success)' : 'var(--text-muted)' }}>{test.status}</strong>
+                      {c.topic}: {test.topic} • {c.target}: {test.targetLevel} • {c.status}: <strong style={{ color: test.status === 'published' ? 'var(--success)' : 'var(--text-muted)' }}>{test.status}</strong>
                     </div>
                   </div>
 
@@ -430,7 +437,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                     style={{ padding: '6px 12px', fontSize: '0.82rem' }}
                   >
                     <Eye size={14} />
-                    <span>Preview</span>
+                    <span>{c.preview}</span>
                   </button>
                 </div>
               ))
@@ -545,13 +552,13 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
             </button>
 
             <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '16px' }}>
-              Publish Learning Material
+              {c.publishMaterial}
             </h2>
 
             <form onSubmit={handleSaveMaterial} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                  Title
+                  {c.title}
                 </label>
                 <input
                   type="text"
@@ -566,7 +573,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Subject (Restricted to Teaching Profile)
+                    {c.subject}
                   </label>
                   <select
                     value={matSubject}
@@ -583,17 +590,17 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
 
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Type
+                    {c.type}
                   </label>
                   <select
                     value={matType}
                     onChange={(e) => setMatType(e.target.value as MaterialType)}
                     style={{ width: '100%', padding: '10px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}
                   >
-                    <option value="text">Text Lesson</option>
-                    <option value="video">Video</option>
-                    <option value="pdf">PDF Document</option>
-                    <option value="link">External Link</option>
+                    <option value="text">{c.textLesson}</option>
+                    <option value="video">{c.video}</option>
+                    <option value="pdf">{c.pdf}</option>
+                    <option value="link">{c.link}</option>
                   </select>
                 </div>
               </div>
@@ -601,7 +608,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Topic / Skill
+                    {c.topicSkill}
                   </label>
                   <input
                     type="text"
@@ -615,23 +622,23 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
 
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Target Level
+                    {c.level}
                   </label>
                   <select
                     value={matLevel}
                     onChange={(e) => setMatLevel(e.target.value as StudentLevel)}
                     style={{ width: '100%', padding: '10px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}
                   >
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
+                    <option value="beginner">{c.beginner}</option>
+                    <option value="intermediate">{c.intermediate}</option>
+                    <option value="advanced">{c.advanced}</option>
                   </select>
                 </div>
               </div>
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                  Description / Overview
+                  {c.description}
                 </label>
                 <input
                   type="text"
@@ -644,7 +651,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                  Content or URL
+                  {c.content}
                 </label>
                 <textarea
                   required
@@ -662,8 +669,8 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                   onChange={(e) => setMatStatus(e.target.value as 'draft' | 'published')}
                   style={{ padding: '8px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', fontSize: '0.85rem' }}
                 >
-                  <option value="published">Publish Immediately</option>
-                  <option value="draft">Save as Draft</option>
+                  <option value="published">{c.publishNow}</option>
+                  <option value="draft">{c.draft}</option>
                 </select>
 
                 <div style={{ display: 'flex', gap: '10px' }}>
@@ -673,14 +680,14 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                     className="btn btn-secondary"
                     style={{ padding: '8px 16px' }}
                   >
-                    Cancel
+                    {c.cancel}
                   </button>
                   <button
                     type="submit"
                     className="btn btn-primary"
                     style={{ padding: '8px 20px' }}
                   >
-                    Save Material
+                    {c.saveMaterial}
                   </button>
                 </div>
               </div>
@@ -730,13 +737,13 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
             </button>
 
             <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '16px' }}>
-              Create Assessment Test
+              {c.createAssessment}
             </h2>
 
             <form onSubmit={handleSaveTest} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                  Test Title
+                  {c.testTitle}
                 </label>
                 <input
                   type="text"
@@ -751,7 +758,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Subject (Restricted to Teaching Profile)
+                    {c.subject}
                   </label>
                   <select
                     value={testSubject}
@@ -768,7 +775,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
 
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Topic / Domain
+                    {c.topicDomain}
                   </label>
                   <input
                     type="text"
@@ -784,38 +791,38 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Target Level
+                    {c.level}
                   </label>
                   <select
                     value={testLevel}
                     onChange={(e) => setTestLevel(e.target.value as StudentLevel)}
                     style={{ width: '100%', padding: '10px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}
                   >
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
+                    <option value="beginner">{c.beginner}</option>
+                    <option value="intermediate">{c.intermediate}</option>
+                    <option value="advanced">{c.advanced}</option>
                   </select>
                 </div>
 
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Target Goal
+                    {c.goal}
                   </label>
                   <select
                     value={testGoal}
                     onChange={(e) => setTestGoal(e.target.value as StudentGoal)}
                     style={{ width: '100%', padding: '10px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}
                   >
-                    <option value="olympiad">Olympiad</option>
-                    <option value="exam">Exam</option>
-                    <option value="grades">Grades</option>
-                    <option value="new_skill">New Skill</option>
+                    <option value="olympiad">{c.olympiad}</option>
+                    <option value="exam">{c.exam}</option>
+                    <option value="grades">{c.grades}</option>
+                    <option value="new_skill">{c.newSkill}</option>
                   </select>
                 </div>
 
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-                    Duration (Min)
+                    {c.duration}
                   </label>
                   <input
                     type="number"
@@ -831,13 +838,13 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
               {/* Question summary / editor */}
               <div style={{ background: '#f8fafc', padding: '16px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
                 <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
-                  Question 1 (with attached Misconceptions)
+                  {c.question} 1 (ErrorMap)
                 </div>
                 <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
                   <strong>Q:</strong> {testQuestions[0].text}
                 </div>
                 <div style={{ marginTop: '6px', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                  Options: {testQuestions[0].options.map(o => o.text).join(' | ')}
+                  {c.options}: {testQuestions[0].options.map(o => o.text).join(' | ')}
                 </div>
               </div>
 
@@ -847,8 +854,8 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                   onChange={(e) => setTestStatus(e.target.value as 'draft' | 'published')}
                   style={{ padding: '8px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', fontSize: '0.85rem' }}
                 >
-                  <option value="published">Publish Immediately</option>
-                  <option value="draft">Save as Draft</option>
+                  <option value="published">{c.publishNow}</option>
+                  <option value="draft">{c.draft}</option>
                 </select>
 
                 <div style={{ display: 'flex', gap: '10px' }}>
@@ -858,14 +865,14 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                     className="btn btn-secondary"
                     style={{ padding: '8px 16px' }}
                   >
-                    Cancel
+                    {c.cancel}
                   </button>
                   <button
                     type="submit"
                     className="btn btn-primary"
                     style={{ padding: '8px 20px', background: 'var(--accent-purple)', borderColor: 'var(--accent-purple)' }}
                   >
-                    Publish Test
+                    {c.publishTest}
                   </button>
                 </div>
               </div>
@@ -919,7 +926,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                 {previewTest.subject}
               </span>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Target: {previewTest.targetLevel}
+                {c.target}: {previewTest.targetLevel}
               </span>
             </div>
 
@@ -942,10 +949,10 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                         border: opt.isCorrect ? '1.5px solid #86efac' : '1px solid var(--border)',
                         color: opt.isCorrect ? '#166534' : 'var(--text-primary)'
                       }}>
-                        {opt.text} {opt.isCorrect && '✓ (Correct)'}
+                        {opt.text} {opt.isCorrect && `✓ (${c.correct})`}
                         {opt.misconceptionNote && (
                           <div style={{ fontSize: '0.78rem', color: '#dc2626', marginTop: '2px' }}>
-                            Misconception note: {opt.misconceptionNote}
+                            {c.misconception}: {opt.misconceptionNote}
                           </div>
                         )}
                       </div>
@@ -961,7 +968,7 @@ export const TeacherDashboardView: React.FC<TeacherDashboardProps> = ({
                 className="btn btn-primary"
                 style={{ padding: '8px 20px' }}
               >
-                Close Preview
+                {c.close}
               </button>
             </div>
           </div>

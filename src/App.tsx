@@ -220,7 +220,7 @@ export function App() {
         {screen === 'diagnostic' && account?.role === 'student' && activeSubject && <DiagnosticView key={`${activeSubject}-${language}`} profile={profile} account={account} language={language} subject={activeSubject} onCancel={() => setScreen('subject')} onComplete={updated => { setProfile(updated); setScreen('results'); }} />}
         {screen === 'results' && activeSubject && <ResultsView profile={profile} language={language} onContinueToPractice={() => setScreen('subject')} onBackToDashboard={() => setScreen('subject')} />}
 
-        {screen === 'teacher_home' && account?.role === 'teacher' && <TeacherDashboardView account={account} language={language} onViewMyClass={() => setScreen('teacher_roster')} onOpenAnalytics={() => setScreen('teacher_analytics')} />}
+        {screen === 'teacher_home' && account?.role === 'teacher' && <TeacherDashboardView key={`teacher-${language}`} account={account} language={language} onViewMyClass={() => setScreen('teacher_roster')} onOpenAnalytics={() => setScreen('teacher_analytics')} />}
         {screen === 'teacher_roster' && account?.role === 'teacher' && <TeacherClassRosterView language={language} onBack={() => setScreen('teacher_home')} />}
         {screen === 'teacher_analytics' && account?.role === 'teacher' && <TeacherAnalyticsView language={language} onBack={() => setScreen('teacher_home')} />}
         {screen === 'profile' && account && <ProfileView account={account} language={language} onAccountUpdated={setAccount} onRestartTutorial={home} onResetData={resetProfile} onLogOut={logout} />}

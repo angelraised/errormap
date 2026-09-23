@@ -422,9 +422,15 @@ textarea:focus {
 /* Components still containing old inline white surfaces inherit the active theme. */
 :root[data-theme='dark'] .main-content [style*="background: rgb(255, 255, 255)"],
 :root[data-theme='dark'] .main-content [style*="background: #ffffff"],
+:root[data-theme='dark'] .main-content [style*="background: #f8fafc"],
+:root[data-theme='dark'] .main-content [style*="background: #fffafb"],
 :root[data-theme='dark'] .tutorial-card {
   background: var(--bg-card) !important;
   color: var(--text-primary) !important;
+}
+
+:root[data-theme='dark'] .teacher-dashboard [style*="linear-gradient"][style*="#ffffff"] {
+  background: linear-gradient(135deg, var(--bg-card-hover), var(--bg-card)) !important;
 }
 
 :root[data-theme='dark'] .main-content [style*="color: rgb(15, 23, 42)"],
