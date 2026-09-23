@@ -22,10 +22,30 @@ import { UserAvatar } from './components/UserAvatar';
 type Screen = 'welcome' | 'login' | 'register' | 'student_home' | 'subjects' | 'subject' |
   'diagnostic' | 'results' | 'teacher_home' | 'teacher_roster' | 'teacher_analytics' | 'profile';
 
-const ACCOUNT_KEY = 'skillpulse_active_user_v3';
+const ACCOUNT_KEY = 'skillpulse_active_user_v4';
 const LANGUAGE_KEY = 'skillpulse_preferred_lang_v3';
 const THEME_KEY = 'skillpulse_theme_v1';
+const ACCOUNT_RESET_KEY = 'skillpulse_legacy_accounts_cleared_2026_09_24';
 type Theme = 'light' | 'dark';
+
+function clearLegacyAccountData() {
+  if (localStorage.getItem(ACCOUNT_RESET_KEY)) return;
+  const legacyExactKeys = new Set([
+    'skillpulse_active_user_v2',
+    'skillpulse_active_user_v3',
+    'skillpulse_accounts_v2',
+    'skillpulse_accounts_v3',
+    'skillpulse_credentials_v1'
+  ]);
+  Object.keys(localStorage).forEach(key => {
+    if (legacyExactKeys.has(key) || key.startsWith('skillpulse_profile_v2_') || key.startsWith('skillpulse_profile_v3_')) {
+      localStorage.removeItem(key);
+    }
+  });
+  localStorage.setItem(ACCOUNT_RESET_KEY, 'done');
+}
+
+clearLegacyAccountData();
 
 const demoAccount: UserAccount = {
   id: 'demo_student', name: 'Alex Rivera', email: 'demo@skillpulse.app', role: 'student', avatar: '',
@@ -37,7 +57,7 @@ function readAccount(): UserAccount | null {
   try { return JSON.parse(localStorage.getItem(ACCOUNT_KEY) ?? 'null'); } catch { return null; }
 }
 
-function profileKey(accountId: string) { return `skillpulse_profile_v3_${accountId}`; }
+function profileKey(accountId: string) { return `skillpulse_profile_v4_${accountId}`; }
 
 function readProfile(account: UserAccount): StudentProfile {
   try {

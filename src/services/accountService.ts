@@ -2,10 +2,10 @@ import type { StudentProfile, SubjectId, TeacherStudentSummary, UserAccount, Lea
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 import { INITIAL_LEARNING_MATERIALS, INITIAL_TEACHER_TESTS } from '../mockData';
 
-const LOCAL_ACCOUNTS_KEY = 'skillpulse_accounts_v3';
+const LOCAL_ACCOUNTS_KEY = 'skillpulse_accounts_v4';
 const LOCAL_MATERIALS_KEY = 'skillpulse_materials_v2';
 const LOCAL_TESTS_KEY = 'skillpulse_tests_v2';
-const LOCAL_CREDENTIALS_KEY = 'skillpulse_credentials_v1';
+const LOCAL_CREDENTIALS_KEY = 'skillpulse_credentials_v2';
 
 async function hashPassword(password: string): Promise<string> {
   const bytes = new TextEncoder().encode(`skillpulse-local-demo:${password}`);
