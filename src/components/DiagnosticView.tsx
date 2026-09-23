@@ -9,7 +9,7 @@ import type {
 } from '../types';
 import type { Language } from '../translations';
 import { translations } from '../translations';
-import { SUBJECT_QUESTION_BANKS } from '../mockData';
+import { getQuestionBank } from '../localizedQuestions';
 import { processAdaptiveAnswer, getDifficultyRange, type AdaptiveUpdateResult } from '../adaptiveEngine';
 import { getLearningMaterials } from '../services/accountService';
 import { 
@@ -35,6 +35,33 @@ interface DiagnosticProps {
   onCancel: () => void;
 }
 
+const diagnosticCopy = {
+  en: {
+    unavailable: 'No adaptive assessment is available for this subject yet', preparing: 'Questions for this subject are currently being prepared by teachers.',
+    question: 'Question', of: 'of', progress: 'Adaptive calibration progress', difficulty: 'Difficulty',
+    confidence: 'How confident are you in this answer?', confidenceHelp: 'ErrorMap uses confidence to identify the cause of a mistake.',
+    guessed: 'Guessed', unsure: 'Not sure', confident: 'Confident', explanation: 'Explanation',
+    clarifyFallback: 'Did you make this mistake because of this specific misconception?', verified: 'Verified',
+    correct: 'Correct! Well reasoned.', complete: 'Complete assessment', next: 'Next question'
+  },
+  ru: {
+    unavailable: 'Для этого предмета пока нет адаптивного теста', preparing: 'Преподаватели ещё готовят вопросы по этому предмету.',
+    question: 'Вопрос', of: 'из', progress: 'Прогресс адаптивной проверки', difficulty: 'Сложность',
+    confidence: 'Насколько ты уверен в ответе?', confidenceHelp: 'ErrorMap учитывает уверенность, чтобы точнее определить причину ошибки.',
+    guessed: 'Угадал', unsure: 'Не уверен', confident: 'Уверен', explanation: 'Объяснение',
+    clarifyFallback: 'Эта ошибка возникла именно из-за указанной причины?', verified: 'Проверено',
+    correct: 'Правильно! Отличное рассуждение.', complete: 'Завершить тест', next: 'Следующий вопрос'
+  },
+  kz: {
+    unavailable: 'Бұл пән бойынша бейімделетін тест әзірге жоқ', preparing: 'Осы пәннің сұрақтарын мұғалімдер әлі дайындап жатыр.',
+    question: 'Сұрақ', of: 'ішінен', progress: 'Бейімделетін тексеру барысы', difficulty: 'Күрделілік',
+    confidence: 'Жауабыңа қаншалықты сенімдісің?', confidenceHelp: 'ErrorMap қате себебін дәлірек анықтау үшін сенімділік деңгейін ескереді.',
+    guessed: 'Болжадым', unsure: 'Сенімді емеспін', confident: 'Сенімдімін', explanation: 'Түсіндірме',
+    clarifyFallback: 'Бұл қате дәл осы себептен болды ма?', verified: 'Тексерілді',
+    correct: 'Дұрыс! Жақсы талдадың.', complete: 'Тестті аяқтау', next: 'Келесі сұрақ'
+  }
+} as const;
+
 export const DiagnosticView: React.FC<DiagnosticProps> = ({ 
   profile, 
   account, 
@@ -44,27 +71,10 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
   onCancel 
 }) => {
   const t = translations[language];
+  const d = diagnosticCopy[language];
   const TOTAL_QUESTIONS = 5;
 
-  const bank = SUBJECT_QUESTION_BANKS[subject];
-
-  if (!bank || bank.length === 0) {
-    return (
-      <div className="card animate-fade-in" style={{ maxWidth: '600px', margin: '40px auto', padding: '40px', textAlign: 'center' }}>
-        <AlertCircle size={44} color="#dc2626" style={{ margin: '0 auto 16px' }} />
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
-          No adaptive assessment is available for this subject yet
-        </h2>
-        <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', marginBottom: '24px' }}>
-          Questions for this subject are currently being prepared by teachers.
-        </p>
-        <button onClick={onCancel} className="btn btn-secondary">
-          <ArrowLeft size={16} />
-          <span>{t.backToSubject}</span>
-        </button>
-      </div>
-    );
-  }
+  const bank = useMemo(() => getQuestionBank(subject, language), [subject, language]);
 
   const bounds = useMemo(() => 
     getDifficultyRange(account.studentLevel, account.studentGoal),
@@ -138,7 +148,8 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
       answeredIds,
       subject,
       account.studentLevel,
-      account.studentGoal
+      account.studentGoal,
+      bank
     );
 
     setLastAdaptation(result);
@@ -218,7 +229,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
             {localizedSubject}
           </span>
           <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-secondary)' }}>
-            Question {questionIndex + 1} of {TOTAL_QUESTIONS}
+            {d.question} {questionIndex + 1} {d.of} {TOTAL_QUESTIONS}
           </span>
         </div>
       </div>
@@ -227,7 +238,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
       <div className="card" style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', marginBottom: '6px' }}>
-            <span>Adaptive Calibration Progress</span>
+            <span>{d.progress}</span>
             <span>{Math.round(((questionIndex + (step === 'feedback' ? 1 : 0)) / TOTAL_QUESTIONS) * 100)}%</span>
           </div>
           <div style={{ height: '6px', background: '#e2e8f0', borderRadius: 'var(--radius-full)', overflow: 'hidden' }}>
@@ -249,7 +260,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
             background: currentQuestion.difficulty >= 4 ? '#fef3c7' : '#e0e7ff',
             color: currentQuestion.difficulty >= 4 ? '#b45309' : '#3730a3'
           }}>
-            Difficulty {currentQuestion.difficulty} / 5
+            {d.difficulty} {currentQuestion.difficulty} / 5
           </span>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
@@ -345,10 +356,10 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
             textAlign: 'center'
           }}>
             <h4 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '6px' }}>
-              How confident are you in this answer?
+              {d.confidence}
             </h4>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-              ErrorMap uses your confidence calibration to detect deep misconceptions.
+              {d.confidenceHelp}
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
@@ -358,7 +369,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
                 className="btn btn-secondary"
                 style={{ padding: '12px', fontSize: '0.88rem' }}
               >
-                🎲 Guessed
+                🎲 {d.guessed}
               </button>
               <button
                 type="button"
@@ -366,7 +377,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
                 className="btn btn-secondary"
                 style={{ padding: '12px', fontSize: '0.88rem' }}
               >
-                🤔 Not Sure
+                🤔 {d.unsure}
               </button>
               <button
                 type="button"
@@ -374,7 +385,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
                 className="btn btn-primary"
                 style={{ padding: '12px', fontSize: '0.88rem' }}
               >
-                🎯 Confident
+                🎯 {d.confident}
               </button>
             </div>
           </div>
@@ -419,7 +430,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
 
             {/* Explanation of why the answer suggests this */}
             <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              <strong>Explanation:</strong> {currentQuestion.explanation}
+              <strong>{d.explanation}:</strong> {currentQuestion.explanation}
             </div>
 
             {/* Clarification Check question */}
@@ -434,7 +445,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1e40af', fontSize: '0.9rem', fontWeight: 700 }}>
                 <HelpCircle size={18} />
-                <span>{t.clarificationPrompt}: {currentQuestion.clarificationQuestion || 'Did you make this mistake because of this specific misconception?'}</span>
+                <span>{t.clarificationPrompt}: {currentQuestion.clarificationQuestion || d.clarifyFallback}</span>
               </div>
 
               <div style={{ display: 'flex', gap: '10px' }}>
@@ -552,7 +563,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
                     cursor: 'pointer'
                   }}
                 >
-                  {verificationDone ? '✓ Verified' : t.checkVerificationBtn}
+                  {verificationDone ? `✓ ${d.verified}` : t.checkVerificationBtn}
                 </button>
               </div>
             )}
@@ -571,7 +582,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
               <CheckCircle2 size={20} color="#16a34a" />
-              <strong style={{ fontSize: '1rem' }}>Correct! Well reasoned.</strong>
+              <strong style={{ fontSize: '1rem' }}>{d.correct}</strong>
             </div>
             <p style={{ fontSize: '0.9rem', margin: 0, lineHeight: 1.45 }}>
               {currentQuestion.explanation}
@@ -587,7 +598,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
               className="btn btn-primary"
               style={{ padding: '14px 28px', fontSize: '1rem', borderRadius: 'var(--radius-md)' }}
             >
-              <span>{questionIndex + 1 >= TOTAL_QUESTIONS ? 'Complete Assessment' : 'Next Question'}</span>
+              <span>{questionIndex + 1 >= TOTAL_QUESTIONS ? d.complete : d.next}</span>
               <ArrowRight size={18} />
             </button>
           </div>

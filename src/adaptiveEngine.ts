@@ -65,9 +65,10 @@ export function processAdaptiveAnswer(
   answeredQuestionIds: string[],
   subject: SubjectId,
   studentLevel: StudentLevel = 'intermediate',
-  studentGoal: StudentGoal = 'grades'
+  studentGoal: StudentGoal = 'grades',
+  questionBank?: Question[]
 ): AdaptiveUpdateResult {
-  const currentBank = SUBJECT_QUESTION_BANKS[subject] || [];
+  const currentBank = questionBank || SUBJECT_QUESTION_BANKS[subject] || [];
   if (currentBank.length === 0) {
     throw new Error(`No adaptive assessment is available for subject: ${subject}`);
   }
