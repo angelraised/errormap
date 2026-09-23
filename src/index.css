@@ -139,6 +139,19 @@ textarea:focus {
   box-shadow: 0 0 0 3px var(--primary-light);
 }
 
+/* Native dropdown menus need explicit colors on Windows/Chromium. */
+:root[data-theme='dark'] select {
+  color-scheme: dark;
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme='dark'] select option,
+:root[data-theme='dark'] select optgroup {
+  background-color: #111827;
+  color: #f8fafc;
+}
+
 /* Base Utility Classes */
 .app-container {
   min-height: 100vh;
