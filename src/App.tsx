@@ -25,12 +25,15 @@ type Screen = 'welcome' | 'login' | 'register' | 'student_home' | 'subjects' | '
 const ACCOUNT_KEY = 'skillpulse_active_user_v4';
 const LANGUAGE_KEY = 'skillpulse_preferred_lang_v3';
 const THEME_KEY = 'skillpulse_theme_v1';
-const ACCOUNT_RESET_KEY = 'skillpulse_legacy_accounts_cleared_2026_09_24';
+const ACCOUNT_RESET_KEY = 'errormap_accounts_cleared_2026_09_24_v2';
 type Theme = 'light' | 'dark';
 
 function clearLegacyAccountData() {
   if (localStorage.getItem(ACCOUNT_RESET_KEY)) return;
   const legacyExactKeys = new Set([
+    'skillpulse_active_user_v4',
+    'skillpulse_accounts_v4',
+    'skillpulse_credentials_v2',
     'skillpulse_active_user_v2',
     'skillpulse_active_user_v3',
     'skillpulse_accounts_v2',
@@ -38,7 +41,7 @@ function clearLegacyAccountData() {
     'skillpulse_credentials_v1'
   ]);
   Object.keys(localStorage).forEach(key => {
-    if (legacyExactKeys.has(key) || key.startsWith('skillpulse_profile_v2_') || key.startsWith('skillpulse_profile_v3_')) {
+    if (legacyExactKeys.has(key) || key.startsWith('skillpulse_profile_v2_') || key.startsWith('skillpulse_profile_v3_') || key.startsWith('skillpulse_profile_v4_')) {
       localStorage.removeItem(key);
     }
   });
