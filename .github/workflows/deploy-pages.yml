@@ -1,4 +1,4 @@
-name: Deploy SkillPulse to GitHub Pages
+name: Deploy ErrorMap to GitHub Pages
 
 on:
   push:

@@ -348,7 +348,7 @@ export const DiagnosticView: React.FC<DiagnosticProps> = ({
               How confident are you in this answer?
             </h4>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-              SkillPulse uses your confidence calibration to detect deep misconceptions.
+              ErrorMap uses your confidence calibration to detect deep misconceptions.
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>

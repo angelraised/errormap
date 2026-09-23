@@ -58,7 +58,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
           }}
         >
           <Activity size={20} color="var(--primary)" />
-          SkillPulse
+          ErrorMap
         </div>
       </div>
 

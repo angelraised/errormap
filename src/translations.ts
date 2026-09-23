@@ -2,7 +2,7 @@ export type Language = 'en' | 'ru' | 'kz';
 
 export const translations = {
   en: {
-    brand: 'SkillPulse',
+    brand: 'ErrorMap',
     brandTagline: 'Learning that adapts before the student gives up.',
     simpleHeroSubtitle: 'An adaptive platform that detects knowledge gaps in minutes and builds a personalized learning path for every student.',
     
@@ -31,7 +31,7 @@ export const translations = {
     cancel: 'Cancel',
 
     // Register Step 1: Basic Info
-    registerTitle: 'Create your SkillPulse account',
+    registerTitle: 'Create your ErrorMap account',
     registerSubtitle: 'Get personalized adaptive learning or manage your classroom in seconds.',
     nameLabel: 'Full Name',
     namePlaceholder: 'e.g. Alex Rivera',
@@ -46,7 +46,7 @@ export const translations = {
 
     // Register Step 2: Role selection
     roleSelectTitle: 'Select your role',
-    roleSelectSubtitle: 'Choose how you will use SkillPulse.',
+    roleSelectSubtitle: 'Choose how you will use ErrorMap.',
     roleStudentTitle: 'I am a Student',
     roleStudentDesc: 'Learn with personalized adaptive lessons, tests, and hints.',
     roleTeacherTitle: 'I am a Teacher / Tutor',
@@ -167,7 +167,7 @@ export const translations = {
     tutSkip: 'Skip',
     tutNext: 'Next',
     tutFinish: 'Got it!',
-    tutStep1Title: 'Welcome to SkillPulse',
+    tutStep1Title: 'Welcome to ErrorMap',
     tutStep1Desc: 'We adapt lessons to your pace so you never get stuck or overwhelmed.',
     tutStep2Title: 'Your Learning Goal',
     tutStep2Desc: 'Here is your current subject and one clear next lesson recommended for you.',
@@ -192,7 +192,7 @@ export const translations = {
     difficulty: 'Difficulty',
     level: 'Level',
     rateConfidence: 'Rate your confidence in this answer:',
-    confidenceSubtitle: 'SkillPulse pairs confidence with correctness to pinpoint hidden misconceptions.',
+    confidenceSubtitle: 'ErrorMap pairs confidence with correctness to pinpoint hidden misconceptions.',
     guessed: 'I guessed',
     guessedDesc: 'Low confidence',
     notSure: 'Not sure',
@@ -219,7 +219,7 @@ export const translations = {
     // Results
     assessmentComplete: 'Diagnostic Assessment Complete',
     cognitiveMapGenerated: 'Personal Cognitive Map Generated',
-    resultsSubtitle: 'SkillPulse analyzed your accuracy, confidence level, and reaction time to identify strengths and pinpoint foundational gaps before you hit a blocker.',
+    resultsSubtitle: 'ErrorMap analyzed your accuracy, confidence level, and reaction time to identify strengths and pinpoint foundational gaps before you hit a blocker.',
     calibratedMastery: 'Overall Calibrated Mastery',
     questionsEvaluated: 'Questions Evaluated',
     itemsCount: '5 Items',
@@ -271,7 +271,7 @@ export const translations = {
   },
 
   ru: {
-    brand: 'SkillPulse',
+    brand: 'ErrorMap',
     brandTagline: 'Обучение, которое адаптируется до того, как ученик сдастся.',
     simpleHeroSubtitle: 'Адаптивная платформа, которая за считанные минуты находит пробелы в знаниях и строит персональный путь для каждого ученика.',
     
@@ -300,7 +300,7 @@ export const translations = {
     cancel: 'Отмена',
 
     // Register Step 1: Basic Info
-    registerTitle: 'Создание аккаунта SkillPulse',
+    registerTitle: 'Создание аккаунта ErrorMap',
     registerSubtitle: 'Начните персональное обучение или подключите класс за несколько секунд.',
     nameLabel: 'Имя и фамилия',
     namePlaceholder: 'Например, Алекс Ривера',
@@ -315,7 +315,7 @@ export const translations = {
 
     // Register Step 2: Role selection
     roleSelectTitle: 'Выберите вашу роль',
-    roleSelectSubtitle: 'Как именно вы планируете использовать SkillPulse?',
+    roleSelectSubtitle: 'Как именно вы планируете использовать ErrorMap?',
     roleStudentTitle: 'Я — Ученик',
     roleStudentDesc: 'Учитесь по адаптивной программе с подсказками и диагностикой.',
     roleTeacherTitle: 'Я — Преподаватель / Репетитор',
@@ -436,7 +436,7 @@ export const translations = {
     tutSkip: 'Пропустить',
     tutNext: 'Далее',
     tutFinish: 'Понятно!',
-    tutStep1Title: 'Добро пожаловать в SkillPulse',
+    tutStep1Title: 'Добро пожаловать в ErrorMap',
     tutStep1Desc: 'Мы адаптируем задания под ваш темп, чтобы учиться было комфортно.',
     tutStep2Title: 'Ваша учебная цель',
     tutStep2Desc: 'Здесь отображается текущий предмет и один рекомендованный следующий шаг.',
@@ -461,7 +461,7 @@ export const translations = {
     difficulty: 'Сложность',
     level: 'Уровень',
     rateConfidence: 'Оцените вашу уверенность в ответе:',
-    confidenceSubtitle: 'SkillPulse сопоставляет уверенность и правильность для выявления скрытых заблуждений.',
+    confidenceSubtitle: 'ErrorMap сопоставляет уверенность и правильность для выявления скрытых заблуждений.',
     guessed: 'Я угадал',
     guessedDesc: 'Низкая уверенность',
     notSure: 'Не уверен',
@@ -488,7 +488,7 @@ export const translations = {
     // Results
     assessmentComplete: 'Диагностика завершена',
     cognitiveMapGenerated: 'Персональная когнитивная карта сформирована',
-    resultsSubtitle: 'SkillPulse проанализировал точность, уверенность и скорость ответа, чтобы выявить сильные стороны и пробелы.',
+    resultsSubtitle: 'ErrorMap проанализировал точность, уверенность и скорость ответа, чтобы выявить сильные стороны и пробелы.',
     calibratedMastery: 'Калиброванное усвоение',
     questionsEvaluated: 'Оценено вопросов',
     itemsCount: '5 заданий',
@@ -540,7 +540,7 @@ export const translations = {
   },
 
   kz: {
-    brand: 'SkillPulse',
+    brand: 'ErrorMap',
     brandTagline: 'Оқушы берілмей тұрып бейімделетін оқыту жүйесі.',
     simpleHeroSubtitle: 'Бірнеше минут ішінде білімдегі олқылықтарды анықтап, әр оқушыға жеке оқу жолын құратын бейімделгіш платформа.',
     
@@ -569,7 +569,7 @@ export const translations = {
     cancel: 'Бас тарту',
 
     // Register Step 1: Basic Info
-    registerTitle: 'SkillPulse аккаунтын ашу',
+    registerTitle: 'ErrorMap аккаунтын ашу',
     registerSubtitle: 'Жеке бейімделгіш оқуды бастаңыз немесе сыныпты бірнеше секундта қосыңыз.',
     nameLabel: 'Аты-жөніңіз',
     namePlaceholder: 'Мысалы, Алекс Ривера',
@@ -584,7 +584,7 @@ export const translations = {
 
     // Register Step 2: Role selection
     roleSelectTitle: 'Рөліңізді таңдаңыз',
-    roleSelectSubtitle: 'SkillPulse жүйесін қалай қолданасыз?',
+    roleSelectSubtitle: 'ErrorMap жүйесін қалай қолданасыз?',
     roleStudentTitle: 'Мен — Оқушымын',
     roleStudentDesc: 'Бейімделгіш сабақтар, көмектер мен тесттер арқылы оқыңыз.',
     roleTeacherTitle: 'Мен — Мұғаліммін / Репетитормын',
@@ -705,7 +705,7 @@ export const translations = {
     tutSkip: 'Өткізіп жіберу',
     tutNext: 'Келесі',
     tutFinish: 'Түсінікті!',
-    tutStep1Title: 'SkillPulse платформасына қош келдіңіз',
+    tutStep1Title: 'ErrorMap платформасына қош келдіңіз',
     tutStep1Desc: 'Оқу жеңіл әрі қызықты болу үшін тапсырмаларды сіздің қарқыныңызға бейімдейміз.',
     tutStep2Title: 'Сіздің оқу мақсатыңыз',
     tutStep2Desc: 'Мұнда ағымдағы пән мен ұсынылған келесі қадам көрсетіледі.',
@@ -730,7 +730,7 @@ export const translations = {
     difficulty: 'Күрделілік',
     level: 'Деңгей',
     rateConfidence: 'Жауабыңызға сенімділігіңізді бағалаңыз:',
-    confidenceSubtitle: 'SkillPulse жасырын қателерді табу үшін сенімділік пен дәлдікті салыстырады.',
+    confidenceSubtitle: 'ErrorMap жасырын қателерді табу үшін сенімділік пен дәлдікті салыстырады.',
     guessed: 'Болжап таптым',
     guessedDesc: 'Төмен сенімділік',
     notSure: 'Сенімсізбін',
@@ -757,7 +757,7 @@ export const translations = {
     // Results
     assessmentComplete: 'Диагностикалық бағалау аяқталды',
     cognitiveMapGenerated: 'Жеке когнитивтік карта жасалды',
-    resultsSubtitle: 'SkillPulse мықты тұстар мен білімдегі кемшіліктерді анықтау үшін дәлдікті, сенімділікті және уақытты талдады.',
+    resultsSubtitle: 'ErrorMap мықты тұстар мен білімдегі кемшіліктерді анықтау үшін дәлдікті, сенімділікті және уақытты талдады.',
     calibratedMastery: 'Калибрленген меңгеру деңгейі',
     questionsEvaluated: 'Бағаланған сұрақтар',
     itemsCount: '5 сұрақ',

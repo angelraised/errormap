@@ -925,7 +925,7 @@ export const INITIAL_LEARNING_MATERIALS: LearningMaterial[] = [
     recommendedGoal: 'grades',
     description: 'Downloadable PDF summarizing argumentative thesis construction and fallacious reasoning detection.',
     type: 'pdf',
-    contentOrUrl: 'https://skillpulse.edu/docs/sat-reading-strategies.pdf',
+    contentOrUrl: 'https://errormap.edu/docs/sat-reading-strategies.pdf',
     status: 'published',
     createdAt: '2026-09-22'
   },

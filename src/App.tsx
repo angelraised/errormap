@@ -48,7 +48,7 @@ function clearLegacyAccountData() {
 clearLegacyAccountData();
 
 const demoAccount: UserAccount = {
-  id: 'demo_student', name: 'Alex Rivera', email: 'demo@skillpulse.app', role: 'student', avatar: '',
+  id: 'demo_student', name: 'Alex Rivera', email: 'demo@errormap.app', role: 'student', avatar: '',
   createdAt: new Date().toLocaleDateString(), studentSubjects: ['english', 'programming'],
   studentLevel: 'advanced', studentGoal: 'olympiad'
 };
@@ -174,7 +174,7 @@ export function App() {
         <div className="navbar-inner">
           <button className="brand" onClick={home}>
             <span className="brand-icon-wrap"><Activity size={20} /></span>
-            <span>SkillPulse<span className="brand-dot">.</span></span>
+            <span>ErrorMap<span className="brand-dot">.</span></span>
           </button>
 
           {signedIn && account && (

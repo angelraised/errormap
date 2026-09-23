@@ -1,32 +1,26 @@
-# React + TypeScript + Vite
+# ErrorMap
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+ErrorMap is an adaptive learning platform that explains **why** a learner made a mistake instead of showing only “incorrect”.
 
-Currently, two official plugins are available:
+It detects likely misconceptions from an answer and confidence level, asks a clarification question, recommends teacher material, gives a hint, and checks the corrected understanding with a new task.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Key features
 
-## React Compiler
+- Subject-specific adaptive diagnostics
+- ErrorMap misconception history
+- Error Twin personalized debugging game
+- Teacher materials, tests, class roster, and analytics
+- Student and teacher accounts synchronized through Supabase
+- English, Russian, and Kazakh interface
+- Light and dark themes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run locally
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Production
+
+The project is automatically deployed to GitHub Pages after every push to `main`.

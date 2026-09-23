@@ -52,7 +52,7 @@ export interface AdaptiveUpdateResult {
 }
 
 /**
- * SkillPulse Adaptive Engine
+ * ErrorMap Adaptive Engine
  * Adapts questions based on accuracy, confidence level, and response time,
  * strictly bounded by studentLevel and studentGoal.
  */
